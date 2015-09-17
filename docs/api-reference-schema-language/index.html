@@ -1,0 +1,49 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><title>GraphQL | A data query language and runtime</title><meta name="viewport" content="width=device-width"><meta property="og:title" content="GraphQL | A data query language and runtime"><meta property="og:type" content="website"><meta property="og:url" content="http://facebook.github.io/graphal/index.html"><meta property="og:description" content="A data query language and runtime"><link rel="shortcut icon" href="/img/favicon.png"><link rel="stylesheet" href="/css/graphql.css"><script type="text/javascript" src="//use.typekit.net/vqa1hcx.js"></script><script type="text/javascript">try{Typekit.load();}catch(e){}</script></head><body><div class="container"><div class="nav-main"><div class="wrap"><a class="nav-home" href="/"><img class="nav-logo" src="/img/logo.svg" width="40" height="40">GraphQL</a><ul class="nav-site"><li><a href="/docs/getting-started/" class="active">Docs</a></li><li><a href="/blog/" class="">Blog</a></li><li><a href="/help/" class="">Help</a></li><li><a href="/code/" class="">Code</a></li><li><a href="http://facebook.github.io/graphql/" target="_blank" class="">Spec</a></li></ul></div></div><section class="content wrap documentationContent"><div class="nav-docs"><div class="nav-docs-section"><h3>Quick Start</h3><ul><li><a style="margin-left:0;" class="active" href="/docs/getting-started/">Getting Started</a></li><li><a style="margin-left:0;" class="active" href="/docs/videos/">Videos</a></li></ul></div><div class="nav-docs-section"><h3>Walkthrough</h3><ul><li><a style="margin-left:0;" class="active" href="/docs/intro/">Introduction</a></li><li><a style="margin-left:0;" class="active" href="/docs/typesystem/">Type System</a></li><li><a style="margin-left:0;" class="active" href="/docs/queries/">Queries</a></li><li><a style="margin-left:0;" class="active" href="/docs/validation/">Validation</a></li><li><a style="margin-left:0;" class="active" href="/docs/introspection/">Introspection</a></li></ul></div><div class="nav-docs-section"><h3>API Reference</h3><ul><li><a style="margin-left:0;" class="active" href="/docs/api-reference-graphql/">GraphQL</a></li><li><a style="margin-left:0;" class="active" href="/docs/api-reference-language/">Language</a></li><li><a style="margin-left:0;" class="active" href="/docs/api-reference-type-system/">Type System</a></li><li><a style="margin-left:0;" class="active" href="/docs/api-reference-validation/">Validation</a></li><li><a style="margin-left:0;" class="active" href="/docs/api-reference-execution/">Execution</a></li><li><a style="margin-left:0;" class="active" href="/docs/api-reference-errors/">Errors</a></li><li><a style="margin-left:0;" class="active" href="/docs/api-reference-schema-language/">Schema Language</a></li><li><a style="margin-left:0;" class="active" href="/docs/api-reference-utilities/">Utilties</a></li></ul></div></div><div class="inner-content"><h1>Schema Language</h1><div><p>The <code>graphql/language/schema</code> module is responsible for parsing and operating on
+the GraphQL schema definition language.</p><pre class="prism language-javascript">
+<span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&#x27;graphql/language/schema&#x27;</span><span class="token punctuation">;</span> <span spellcheck="true" class="token comment">// ES6</span>
+<span class="token keyword">var</span> GraphQLSchemaLanguage <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&#x27;graphql/language/schema&#x27;</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span spellcheck="true" class="token comment">// CommonJS</span></pre><h2><a class="anchor" name="overview"></a>Overview <a class="hash-link" href="#overview">#</a></h2><p><em>Parser</em></p><div><ul class="apiIndex">
+  <li>
+    <a href="#parseschemaintoast">
+      <pre>function parseSchemaIntoAST</pre>
+      Parses a string representation of a schema into a Schema AST
+    </a>
+  </li>
+  <li>
+    <a href="#kind">
+      <pre>var Kind</pre>
+      Represents the various kinds of parsed Schema AST nodes.
+    </a>
+  </li>
+</ul>
+
+</div><p><em>Visitor</em></p><div><ul class="apiIndex">
+  <li>
+    <a href="#visitschema">
+      <pre>function visitSchema</pre>
+      A general-purpose visitor to traverse a parsed GraphQL Schema AST
+    </a>
+  </li>
+</ul>
+
+</div><p><em>Printer</em></p><div><ul class="apiIndex">
+  <li>
+    <a href="#printschema">
+      <pre>function printSchema</pre>
+      Prints the schema AST in a standard format.
+    </a>
+  </li>
+</ul>
+
+</div><h2><a class="anchor" name="parser"></a>Parser <a class="hash-link" href="#parser">#</a></h2><h3><a class="anchor" name="parseschemaintoast"></a>parseSchemaIntoAST <a class="hash-link" href="#parseschemaintoast">#</a></h3><pre class="prism language-javascript">
+<span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">parseSchemaIntoAST</span><span class="token punctuation">(</span>
+  source<span class="token punctuation">:</span> Source <span class="token operator">|</span> string<span class="token punctuation">,</span>
+  options<span class="token operator">?</span><span class="token punctuation">:</span> ParseOptions
+<span class="token punctuation">)</span><span class="token punctuation">:</span> SchemaDocument</pre><p>Given a schema string, parses it into a Schema AST.</p><h4><a class="anchor" name="example"></a>Example <a class="hash-link" href="#example">#</a></h4><pre class="prism language-javascript">
+<span class="token keyword">var</span> schemaAST <span class="token operator">=</span> <span class="token function">parseSchemaIntoAST</span><span class="token punctuation">(</span><span class="token string">&#x27;type Hello { world: String }&#x27;</span><span class="token punctuation">)</span><span class="token punctuation">;</span></pre><h3><a class="anchor" name="kind"></a>Kind <a class="hash-link" href="#kind">#</a></h3><p>An enum that describes the different kinds of Schema AST nodes.</p><h2><a class="anchor" name="visitor"></a>Visitor <a class="hash-link" href="#visitor">#</a></h2><h3><a class="anchor" name="visitschema"></a>visitSchema <a class="hash-link" href="#visitschema">#</a></h3><pre class="prism language-javascript">
+<span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">visitSchema</span><span class="token punctuation">(</span>root<span class="token punctuation">,</span> visitor<span class="token punctuation">,</span> keys<span class="token punctuation">)</span><span class="token punctuation">;</span> any</pre><p>The equivalent of <code>graphql/language</code>&#x27;s
+<strong><a href="api-reference-language.html#visit" target="_blank">visit</a></strong> method, but for
+schema ASTs parsed by <code>parseSchemaIntoAST</code>.</p><h2><a class="anchor" name="printer"></a>Printer <a class="hash-link" href="#printer">#</a></h2><h3><a class="anchor" name="printschema"></a>printSchema <a class="hash-link" href="#printschema">#</a></h3><pre class="prism language-javascript">
+<span class="token keyword">function</span> <span class="token function">printSchema</span><span class="token punctuation">(</span>ast<span class="token punctuation">)</span><span class="token punctuation">:</span> string</pre><p>Converts a Schema AST into a string, using one set of reasonable
+formatting rules.</p></div><div class="docs-prevnext"><a class="docs-next" href="/docs/api-reference-utilities">Next →</a></div></div></section><footer class="wrap"><div class="right">©2015 Facebook Inc.</div></footer></div><div id="fb-root"></div><script>
+            !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+          </script></body></html>
